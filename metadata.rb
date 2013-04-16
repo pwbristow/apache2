@@ -43,7 +43,7 @@ recipe            "apache2::mod_proxy_http", "Apache module 'proxy_http'"
 recipe            "apache2::mod_python", "Apache module 'python'"
 recipe            "apache2::mod_rewrite", "Apache module 'rewrite'"
 recipe            "apache2::mod_setenvif", "Apache module 'setenvif' with config file"
-recipe            "apache2::mod_ssl", "Apache module 'ssl' with config file, adds port 443 to listen_ports"
+recipe            "apache2::mod_ssl", "Apache module 'ssl' with config file, adds port node[ssl_listen_port] to listen_ports"
 recipe            "apache2::mod_status", "Apache module 'status' with config file"
 recipe            "apache2::mod_xsendfile", "Apache module 'xsendfile'"
 
@@ -80,6 +80,11 @@ attribute "apache/icondir",
   :display_name => "Apache Icondir",
   :description => "Directory location for icons",
   :default => "/usr/share/apache2/icons"
+
+attribute "apache/ssl_listen_ports",
+  :display_name => "Apache SSL Listen Ports",
+  :description => "Port that Apache should listen on for SSL connections",
+  :default => "443"
 
 attribute "apache/listen_ports",
   :display_name => "Apache Listen Ports",

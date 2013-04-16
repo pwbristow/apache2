@@ -39,13 +39,15 @@ describe 'apache2::default' do
     assert_match(/^ServerTokens Prod *$/, File.read("#{node['apache']['dir']}/conf.d/security"))
   end
 
-  it 'listens on port 80' do
-    apache_configured_ports.must_include(80)
+  it 'listens on port listen_ports' do
+    node['apache']['listen_ports'].each { |p| 
+      apache_configured_ports.must_include(p.to_i)
+    }
   end
 
   it 'only listens on port 443 when SSL is enabled' do
     unless ran_recipe?('apache2::mod_ssl')
-      apache_configured_ports.wont_include(443)
+      apache_configured_ports.wont_include(node['apache']['ssl_listen_port'])
     end
   end
 

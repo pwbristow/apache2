@@ -104,6 +104,7 @@ end
 
 # General settings
 default['apache']['listen_ports'] = ["80"]
+default['apache']['ssl_listen_port'] = "443"
 default['apache']['contact'] = "ops@example.com"
 default['apache']['timeout'] = 300
 default['apache']['keepalive'] = "On"

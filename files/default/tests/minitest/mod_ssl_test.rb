@@ -16,8 +16,8 @@ describe 'apache2::mod_ssl' do
     file("#{node['apache']['dir']}/conf.d/ssl.conf").wont_exist
   end
 
-  it "is configured to listen on port 443" do
-    apache_configured_ports.must_include(443)
+  it "is configured to listen on the correct port" do
+    apache_configured_ports.must_include(node['apache']['ssl_listen_port'].to_i)
   end
 
   it 'configures SSLCiphersuit from an attribute' do
